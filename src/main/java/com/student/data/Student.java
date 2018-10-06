@@ -3,14 +3,15 @@ package com.student.data;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class StudentPojo {
-	public StudentPojo(String name, String lastName, int id) {
+public class Student {
+	public Student(String name, String lastName, int id, int deptId) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
 		this.id = id;
+		this.deptId=deptId;
 	}
-	public StudentPojo() {
+	public Student() {
 		
 	}
 	String name, lastName;
@@ -33,6 +34,13 @@ public class StudentPojo {
 		this.id = id;
 	}
 	int id;
+	int deptId;
+	public int getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
+	}
 	
 
 }
