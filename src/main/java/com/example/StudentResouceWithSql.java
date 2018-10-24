@@ -9,14 +9,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import com.student.data.Student;
-
-import dao.StudentRepositoryDao;
+import dao.StudentDao;
 
 @Path("/database")
 public class StudentResouceWithSql {
-	StudentRepositoryDao student=new StudentRepositoryDao();
+	StudentDao student=new StudentDao();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

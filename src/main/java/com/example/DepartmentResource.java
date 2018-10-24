@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-
 import com.service.DepartmentService;
 import com.student.data.Department;
 
@@ -30,7 +29,7 @@ public class DepartmentResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{departmentId}")
+	@Path("/{departmentId}")
 	public Department getDepartment(@PathParam("departmentId") int departmentId) {
 		return departmentService.getParticularDepartment(departmentId);
 		
@@ -58,6 +57,10 @@ public class DepartmentResource {
 	public void removeDepartment(@PathParam("departmentId") int departmentId) {
 		departmentService.removeDepartment(departmentId);		
 	}
-	
+	@GET
+	@Path("/{departmentId}/student")
+	public StudntOfOneDept getStudntOfOneDept() {
+		return new StudntOfOneDept();
+	}
 	
 }

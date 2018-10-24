@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Student {
 	public Student(String name, String lastName, int id, int deptId) {
 		super();
-		this.name = name;
+		this.firstName = name;
 		this.lastName = lastName;
 		this.id = id;
 		this.deptId=deptId;
@@ -14,12 +14,12 @@ public class Student {
 	public Student() {
 		
 	}
-	String name, lastName;
-	public String getName() {
-		return name;
+	String firstName, lastName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String name) {
+		this.firstName = name;
 	}
 	public String getLastName() {
 		return lastName;

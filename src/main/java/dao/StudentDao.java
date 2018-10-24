@@ -6,18 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.mysql.cj.api.jdbc.Statement;
 import com.mysql.cj.jdbc.PreparedStatement;
 import com.student.data.Student;
 
-public class StudentRepositoryDao {
+public class StudentDao {
 	Connection connection = null;
 
-	public StudentRepositoryDao() {
+	public StudentDao() {
 		try {
-			String connectionUrl = "jdbc:mysql://localhost:3306/test";
-			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			String connectionUrl = "jdbc:mysql://hostname:3306/student_service?useSSL=false";
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connection = DriverManager.getConnection(connectionUrl, "root", "pooja2016");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -41,8 +40,13 @@ public class StudentRepositoryDao {
 				studentList.add(student);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return studentList;
 
@@ -61,6 +65,12 @@ public class StudentRepositoryDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return student;
 	}
@@ -74,8 +84,13 @@ public class StudentRepositoryDao {
 			statement.setString(3, s1.getLastName());
 			statement.setInt(4, s1.getDeptId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 				
