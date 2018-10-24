@@ -16,7 +16,7 @@ public class StudentDao {
 	public StudentDao() {
 		try {
 			String connectionUrl = "jdbc:mysql://hostname:3306/student_service?useSSL=false";
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			connection = DriverManager.getConnection(connectionUrl, "root", "pooja2016");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class StudentDao {
 		List<Student> studentList = new ArrayList<>();
 		String query = "select * from student";
 		try {
-			Statement statemant = (Statement) connection.createStatement();
+			java.sql.Statement statemant = connection.createStatement();
 			ResultSet resultSet = statemant.executeQuery(query);
 			while (resultSet.next()) {
 				Student student = new Student();
@@ -39,21 +39,16 @@ public class StudentDao {
 				student.setDeptId(resultSet.getInt(4));
 				studentList.add(student);
 			}
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		return studentList;
 
 	}
 
 	public Student getStudent(int studentId) {
-		String query = "select * from student where id " + studentId;
+		String query = "select * from student where id= " + studentId;
 		Student student = new Student();
 		try {
 			Statement statemant = (Statement) connection.createStatement();
