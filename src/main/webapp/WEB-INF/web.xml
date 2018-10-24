@@ -14,5 +14,5 @@
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/v1/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>  
 </web-app>
