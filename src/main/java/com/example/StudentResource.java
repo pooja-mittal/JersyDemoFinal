@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import com.service.StudentService;
 import com.student.data.Student;
 
-@Path("/student")
+@Path("/studentDao")
 public class StudentResource {
 	
 	StudentService studentService=new StudentService();

@@ -16,40 +16,49 @@ import dao.StudentDao;
 
 @Path("/database")
 public class StudentResouceWithSql {
-	StudentDao student=new StudentDao();
+	StudentDao studentDao=new StudentDao();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getAllStudent() {
-		return student.getAllStudent();
+		return studentDao.getAllStudent();
 	}
 	
 	@GET
 	@Path("/{studentId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getParticularStudent(@PathParam("studentId") int studentId) {
-		return student.getStudent(studentId);
+		return studentDao.getStudent(studentId);
 	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createNewStudent(Student s1) {
-		 student.createNewStudent(s1);
+		 studentDao.createNewStudent(s1);
 	}
 	
 	@DELETE
 	@Path("/{studentId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void deleteStudent(@PathParam("studentId") int studentId) {
-		student.deleteStudent(studentId);
+		studentDao.deleteStudent(studentId);
 	}
 	
 	@PUT
-	@Path("/{studentId}")
+	@Path("/{updateStudent}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Student updateStudentInfo(@PathParam("studentId") int studentId) {
-		student.updateStudentInfo(studentId);
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Student updateStudentInfo(Student updateStudent) {
+		System.out.println("firstname "+ updateStudent.getFirstName()+ " lastname "+ updateStudent.getLastName() + " id " + updateStudent.getId());
+		System.out.println("inside put");
+		if(studentDao.getStudent(updateStudent.getId())==null) {
+			studentDao.createNewStudent(updateStudent);
+		} else {
+			studentDao.updateStudentInfo(updateStudent);
+		}	
+		
+		return studentDao.getStudent(updateStudent.getId());
 	}
 	
 

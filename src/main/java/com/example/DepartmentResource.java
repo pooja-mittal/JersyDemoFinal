@@ -58,7 +58,7 @@ public class DepartmentResource {
 		departmentService.removeDepartment(departmentId);		
 	}
 	@GET
-	@Path("/{departmentId}/student")
+	@Path("/{departmentId}/studentDao")
 	public StudntOfOneDept getStudntOfOneDept() {
 		return new StudntOfOneDept();
 	}
