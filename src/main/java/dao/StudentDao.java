@@ -11,15 +11,16 @@ import com.student.data.Student;
 
 public class StudentDao {
 
-	java.sql.Connection connection;
-	static Statement statement;
+	java.sql.Connection connection=null;
+	static Statement statement=null;
 	Student student;
+	PreparedStatement preparestatement=null;
 
 	public StudentDao() {
 		try {
 			String connectionUrl = "jdbc:mysql://localhost:3306/student_service?useSSL=false";
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			connection = DriverManager.getConnection(connectionUrl, "root", "root");
+			connection = DriverManager.getConnection(connectionUrl, "root", "pooja2016");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -28,10 +29,9 @@ public class StudentDao {
 	}
 
 	public List<Student> getAllStudent() {
-		List<Student> studentList = new ArrayList<>();
-		
+		List<Student> studentList = new ArrayList<>();		
 		try {
-			String query = "select * from studentDao";
+			String query = "select * from student";
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
@@ -41,19 +41,23 @@ public class StudentDao {
 				student.setLastName(resultSet.getString(3));
 				student.setDeptId(resultSet.getInt(4));
 				studentList.add(student);
-			}
-			resultSet.close();
-			statement.close();
-			connection.close();
+			}						
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return studentList;
 
 	}
 
 	public Student getStudent(int studentId) {
-		String query = "select * from studentDao where studentId= " + studentId;
+		String query = "select * from student where studentId= " + studentId;
 		student=new Student();
 		try {
 			statement = connection.createStatement();
@@ -65,19 +69,24 @@ public class StudentDao {
 				student.setDeptId(resultSet.getInt(4));
 
 			}
-			resultSet.close();
-			statement.close();
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return student;
 	}
 
 	public void createNewStudent(Student s1) {
-		String query = "insert into studentDao values(?,?,?,?)";
+		student=new Student();
+		String query = "insert into student values(?,?,?,?)";
 		try {
-			PreparedStatement preparestatement = (PreparedStatement) connection.prepareStatement(query);
+			preparestatement = connection.prepareStatement(query);
 			preparestatement.setInt(1, s1.getId());
 			preparestatement.setString(2, s1.getFirstName());
 			preparestatement.setString(3, s1.getLastName());
@@ -87,24 +96,24 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
+				preparestatement.close();
 				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public void deleteStudent(int studentId) {
-		String deleteQuery = "delete from studentDao where studentId=" + studentId;
+		String deleteQuery = "delete from student where studentId=" + studentId;
 		try {
-			PreparedStatement preparestatement = connection.prepareStatement(deleteQuery);
+			preparestatement = connection.prepareStatement(deleteQuery);
 			preparestatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
+				preparestatement.close();
 				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -113,25 +122,45 @@ public class StudentDao {
 	}
 
 	public void updateStudentInfo(Student updateStudent) {
+		
 		//if id is not there return and display message you forgot to enter id parameter which is mandatory. 
-		String updateQuery = "update studentDao set FirstName=?, LastName=? where studentId=? ";
-		try {
-			PreparedStatement updateStatement = connection.prepareStatement(updateQuery);			
-			updateStatement.setString(1, updateStudent.getFirstName());
-			updateStatement.setString(2, updateStudent.getLastName());
-			updateStatement.setInt(3, updateStudent.getId());
-			updateStatement.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+//		List<Student> studentList=getAllStudent();
+//		if(!(studentList.contains(updateStudent.getId()))) {
+//			System.out.println("To update student information, id parameter must pass. forgot to enter srudentId");
+//			return;
+//		} else {
+		System.out.println("firstname "+ updateStudent.getFirstName()+ " lastname "+ updateStudent.getLastName() + " id " + updateStudent.getId());
+			String updateQuery = "";
+			System.out.println("query "+ updateQuery);
+			System.out.println("connection with jdbc ");				
+				try {				
+					preparestatement = connection.prepareStatement("update student set FirstName=?, LastName=?, departmentId=? where studentId=?");
+					preparestatement.setString(1, updateStudent.getFirstName());
+					preparestatement.setString(2, updateStudent.getLastName());
+					preparestatement.setInt(3, updateStudent.getDeptId());
+					preparestatement.setInt(4, updateStudent.getId());
+					int row=preparestatement.executeUpdate();
+					System.out.println("row effected "+ row);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+				try {
+					if(connection!=null) {
+						preparestatement.close();
+						connection.close();
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch(NullPointerException e) {
+					e.getMessage();
+				}
+				
 			}
 		}
+		
 
-	}
+	
 
 }

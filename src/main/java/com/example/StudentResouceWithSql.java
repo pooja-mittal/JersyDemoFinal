@@ -49,16 +49,17 @@ public class StudentResouceWithSql {
 	@Path("/{updateStudent}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Student updateStudentInfo(Student updateStudent) {
-		System.out.println("firstname "+ updateStudent.getFirstName()+ " lastname "+ updateStudent.getLastName() + " id " + updateStudent.getId());
-		System.out.println("inside put");
+	public Student updateStudentInfo(Student updateStudent) {		
 		if(studentDao.getStudent(updateStudent.getId())==null) {
+			System.out.println("id doesn't exists");
 			studentDao.createNewStudent(updateStudent);
 		} else {
+			System.out.println("id exists");
 			studentDao.updateStudentInfo(updateStudent);
 		}	
 		
-		return studentDao.getStudent(updateStudent.getId());
+//		return studentDao.getStudent(updateStudent.getId());
+		return updateStudent;
 	}
 	
 
