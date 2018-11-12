@@ -1,10 +1,14 @@
 package com.student.data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+//@XmlRootElement
+@Entity
 public class Department {
 	
+	@Id
 	int departmentId;
 	String hodName;
 	String departmentName;
@@ -37,7 +41,11 @@ public class Department {
 	public Department() {
 		
 	}
-	
+	@Override
+	public String toString() {
+		return "Department [departmentId=" + departmentId + ", hodName=" + hodName + ", departmentName="
+				+ departmentName + "]";
+	}	
 	
 	
 }
