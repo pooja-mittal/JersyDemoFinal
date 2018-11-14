@@ -1,4 +1,4 @@
-package com.example;
+package com.resource;
 
 import java.util.List;
 
@@ -11,7 +11,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import com.student.data.Student;
+
+import com.pojo.Student;
+
 import dao.StudentDao;
 
 @Path("/database")

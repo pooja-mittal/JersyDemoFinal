@@ -1,4 +1,4 @@
-package com.student.data;
+package com.pojo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

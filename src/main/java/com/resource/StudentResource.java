@@ -1,4 +1,4 @@
-package com.example;
+package com.resource;
 
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -12,8 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+
+import com.pojo.Student;
 import com.service.StudentService;
-import com.student.data.Student;
 
 @Path("/studentDao")
 public class StudentResource {

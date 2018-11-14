@@ -1,4 +1,4 @@
-package com.example;
+package com.resource;
 
 import java.util.List;
 
@@ -13,8 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+
+import com.pojo.Department;
 import com.service.DepartmentService;
-import com.student.data.Department;
 
 @Path("/department")
 public class DepartmentResource {

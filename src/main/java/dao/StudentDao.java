@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.student.data.Student;
+
+import com.pojo.Student;
 
 public class StudentDao {
 

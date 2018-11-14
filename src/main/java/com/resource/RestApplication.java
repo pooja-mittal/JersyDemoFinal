@@ -1,4 +1,4 @@
-package com.example;
+package com.resource;
 
 import org.glassfish.jersey.moxy.json.MoxyJsonFeature;
 import org.glassfish.jersey.server.ResourceConfig;

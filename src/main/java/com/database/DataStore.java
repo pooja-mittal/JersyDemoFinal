@@ -3,8 +3,8 @@ package com.database;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.student.data.Department;
-import com.student.data.Student;
+import com.pojo.Department;
+import com.pojo.Student;
 
 public class DataStore {
 

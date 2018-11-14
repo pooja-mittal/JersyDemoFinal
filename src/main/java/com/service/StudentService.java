@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.database.DataStore;
-import com.student.data.Student;
+import com.pojo.Student;
 
 public class StudentService {
 	static Map<Integer, Student> studentStore=DataStore.getAllStudentData();

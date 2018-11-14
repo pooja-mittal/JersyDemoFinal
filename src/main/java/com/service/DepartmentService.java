@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.database.DataStore;
-import com.student.data.Department;
+import com.pojo.Department;
 
 public class DepartmentService {
 	

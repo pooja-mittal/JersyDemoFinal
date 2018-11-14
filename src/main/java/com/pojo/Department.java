@@ -1,4 +1,4 @@
-package com.student.data;
+package com.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
