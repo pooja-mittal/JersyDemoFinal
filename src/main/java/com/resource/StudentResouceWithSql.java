@@ -16,7 +16,7 @@ import com.pojo.Student;
 
 import dao.StudentDao;
 
-@Path("/database")
+@Path("/student")
 public class StudentResouceWithSql {
 	StudentDao studentDao=new StudentDao();
 	

@@ -21,7 +21,7 @@ public class StudentDao {
 		try {
 			String connectionUrl = "jdbc:mysql://localhost:3306/student_service?useSSL=false";
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			connection = DriverManager.getConnection(connectionUrl, "root", "pooja2016");
+			connection = DriverManager.getConnection(connectionUrl, "root", "root");
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
