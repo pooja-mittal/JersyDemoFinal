@@ -11,37 +11,37 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.pojo.Student;
-import dao.StudentDao;
+import com.service.StudentSqlService;
 
 @Path("/database")
 public class StudentResouceWithSql {
-	StudentDao studentDao = new StudentDao();
+	StudentSqlService studentService = new StudentSqlService();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getAllStudent() {
-		return studentDao.getAllStudent();
+		return studentService.getAll();
 	}
 
 	@GET
 	@Path("/{studentId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getParticularStudent(@PathParam("studentId") int studentId) {
-		return studentDao.getStudent(studentId);
+		return studentService.getById(studentId);
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createNewStudent(Student s1) {
-		studentDao.createNewStudent(s1);
+		studentService.create(s1);
 	}
 
 	@DELETE
 	@Path("/{studentId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void deleteStudent(@PathParam("studentId") int studentId) {
-		studentDao.deleteStudent(studentId);
+		studentService.deleteById(studentId);
 	}
 
 	@PUT
@@ -49,7 +49,7 @@ public class StudentResouceWithSql {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Student updateStudentInfo(Student updateStudent) {
-		studentDao.updateStudentInfo(updateStudent);
+		studentService.update(updateStudent);
 		return updateStudent;
 	}
 
