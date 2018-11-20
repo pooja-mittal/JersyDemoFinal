@@ -5,9 +5,9 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //@XmlRootElement
-//@Entity
+@Entity
 public class Department {
-	
+	@Id
 	int departmentId;
 	String hodName;
 	String departmentName;

@@ -10,11 +10,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import com.pojo.Department;
 
-public class DepartmentDao {	
+public class DepartmentDaoWithSql {	
 	Session session;
 	Transaction trans;
 	
-	public DepartmentDao() {
+	public DepartmentDaoWithSql() {
 		Configuration conf=new Configuration().configure("resources\\hibernate.cfg.xml").addAnnotatedClass(Department.class);
 		ServiceRegistry reg=(ServiceRegistry) new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry();
 		SessionFactory factory=conf.buildSessionFactory(reg);
