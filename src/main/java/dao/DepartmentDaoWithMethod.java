@@ -12,10 +12,14 @@ import com.pojo.Department;
 
 public class DepartmentDaoWithMethod {
 
-	public static Session setup() {
+	public Session setup() {
 		Session session = null;
 		try {
-			Configuration conf = new Configuration().configure("com\\configuration\\file\\hibernate.cfg.xml")
+//			ClassLoader classLoader = this.getClass().getClassLoader();
+//			File file=new File(classLoader.getResource("hibernate.cfg.xml").getFile());
+//			
+//			System.out.println("file "+ file.exists());
+			Configuration conf = new Configuration().configure("com\\config\\hibernate.cfg.xml")
 					.addAnnotatedClass(Department.class);
 			ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(conf.getProperties())
 					.buildServiceRegistry();
@@ -28,20 +32,21 @@ public class DepartmentDaoWithMethod {
 		return session;
 	}
 	
-	public void createDept() {
+	public Department createDept(Department newDept) {
 		Session session =setup();
 		Transaction createTrans = session.beginTransaction();
-		Department dept = new Department(102, "ECE", "kaku");
+		Department dept = new Department(newDept.getDepartmentId(), newDept.getDepartmentName(), newDept.getHodName());
 		Integer pk = (Integer) session.save(dept);
 		System.out.println("primary key " + pk);
 		createTrans.commit();
 		session.evict(dept);
+		return dept;
 	}
 	
-	public void updateDeptInfo() {
+	public void updateDeptInfo(Department updateDepartment) {
 		Session session =setup();
 		Transaction updateTrans = session.beginTransaction();
-		Department dept = new Department(102, "ECE", "himanshu");
+		Department dept = new Department(updateDepartment.getDepartmentId(), updateDepartment.getDepartmentName(), updateDepartment.getHodName());
 		session.saveOrUpdate(dept);
 		// if all non primary we want to change then use update/merge(can be used with
 		// select) otherwise use saveorupdate
@@ -60,21 +65,23 @@ public class DepartmentDaoWithMethod {
 		System.out.println("delete succesffuly");
 	}
 	
-	public void selectDept(int departmentId ) {
+	public Department selectDept(int departmentId ) {
 		Session session=setup();		
 		Object obj=session.get(Department.class, departmentId);
 		Department dept=(Department)obj;
 		System.out.println("dept id "+ dept.getDepartmentId()+ " dept name "+ dept.getDepartmentName() + " Hod name "+ dept.getHodName());
 		session.close();
 		//there is no transaction command for select 
+		return dept;
 	}
 	
-	public void getListOFDept() {
+	public List<Department> getListOFDept() {
 		Session session=setup();	
 		List<Department> list=session.createCriteria(Department.class).list();
 		for(Department d: list) {
 			System.out.println(d);
 		}
+		return list;
 	}
 
 }
