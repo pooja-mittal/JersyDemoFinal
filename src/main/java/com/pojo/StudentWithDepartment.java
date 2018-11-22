@@ -1,6 +1,11 @@
 package com.pojo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class StudentWithDepartment {
+	@Id
 	int id;
 	String hodName;
 	String departmentName;
@@ -49,6 +54,5 @@ public class StudentWithDepartment {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
 
 }

@@ -1,9 +1,7 @@
 package com.service;
 
 import java.util.List;
-
 import com.pojo.Department;
-
 import dao.DepartmentDaoWithMethod;
 
 //connect jersy to dao
