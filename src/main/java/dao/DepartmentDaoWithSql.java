@@ -41,9 +41,14 @@ public class DepartmentDaoWithSql {
 	}
 	
 	public void deleteParticularDept(int deptId) {
-		Query query=session.createQuery("delete from department where departmentId ="+deptId);
-		query.executeUpdate();
-		trans.commit();		
+		if(deptId==0) {
+			return;
+		} else {
+			Query query=session.createQuery("delete from department where departmentId ="+deptId);
+			query.executeUpdate();
+			trans.commit();	
+		}
+			
 	}
 	
 	public void createNewDepartment(int deptId) {

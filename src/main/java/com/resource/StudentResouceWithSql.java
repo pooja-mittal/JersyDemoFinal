@@ -33,8 +33,9 @@ public class StudentResouceWithSql {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void createNewStudent(Student s1) {
+	public Student createNewStudent(Student s1) {
 		studentService.create(s1);
+		return s1;
 	}
 
 	@DELETE
